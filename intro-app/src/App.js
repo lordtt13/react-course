@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import HighScore from './hs';
 
 class app extends Component {
     constructor(props) {
@@ -12,26 +13,30 @@ class app extends Component {
     }
 
     componentDidUpdate(props, state) {
-        if(this.state.count > 10 && this.state.count != state.count && !this.state.over){
-            this.state.over = true
+        if(this.state.count > 10 && this.state.count !== state.count && !this.state.over){
+            this.setState({over: true})
         }
     }
 
+    reset = () => {
+        this.setState({count:0, over : false})
+    }
+    
     render() {
     let inst = 'VIT'
     let {count} = this.state;
-    return (
-        <div>
-          <h1>It's been {count} days since I've been back to {inst}</h1>
-            {this.state.over?
-                <h3>Beat the high score here!</h3>
-                :null
-            }
-            <span>
+        return (
+            <div>
+                <h1>It's been {count} days since I've been back to {inst}</h1>
+                <HighScore
+                    over = {this.state.over}
+                    onReset = {this.reset}
+                />
+                <span>
             <button onClick = {() => this.handleClick()}> Click here to increment count </button>
             </span>
-        </div>
-    )
+            </div>
+        );
   }
 }
 
