@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import HighScore from './hs';
+import './styles/index.css'
 
 class app extends Component {
     constructor(props) {
